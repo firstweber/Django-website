@@ -1,2 +1,12 @@
-132131321
-12343433
+main{
+    firstsite
+}
+app{
+    article,
+    customerCart,
+    customerOrder,
+    customers,
+    myapp,
+    polls,
+}
+
