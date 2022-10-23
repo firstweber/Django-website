@@ -30,7 +30,7 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-# article, customers, customerOrder, customerCart are not on the book 
+# article, customers, customerOrder, customerCart are not in the book 
 
 INSTALLED_APPS = [
     'django.contrib.admin',
