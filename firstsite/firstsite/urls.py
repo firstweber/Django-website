@@ -18,6 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('polls/', include('polls.urls')),
+    path('polls/', include('polls.urls')),  # 此方式可方便管理各個APP
     path('admin/', admin.site.urls),
 ]
