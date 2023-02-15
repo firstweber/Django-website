@@ -7,8 +7,9 @@
     <ul>
     {% for question in latest_question_list %}
         {% comment %} <li><a href="/polls/{{ question.id }}/">{{ question.question_text }} PublishDate : {{question.pub_date}}</a></li> {% endcomment %}
-        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+        {% comment %} <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li> {% endcomment %}
         {% comment %} "{% url 'detail' %}" detail is from urls.py of name="detail" {% endcomment %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
