@@ -18,9 +18,7 @@ from .models import Question, Choice
 #def index(request):
 #    latest_question_list = Question.objects.order_by('-pub_date')[:5]
 #    template = loader.get_template('polls/index.html')
-#    context = {
-#        'latest_question_list': latest_question_list,
-#    }
+#    context = {'latest_question_list': latest_question_list,}
 #    return HttpResponse(template.render(context, request))
 
 # Using shortcut: render
@@ -80,7 +78,10 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,))) # reverse() return like : "/polls/3/results/"
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,))) 
+        # reverse() return like : "/polls/3/results/"
+
+# Index, Detail, Results using generic views class.
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
