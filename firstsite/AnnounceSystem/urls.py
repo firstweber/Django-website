@@ -21,4 +21,5 @@ app_name = 'AnnounceSystem'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('error/', views.test_error, name='test'),
 ]
