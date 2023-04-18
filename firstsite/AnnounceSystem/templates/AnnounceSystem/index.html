@@ -1,4 +1,48 @@
 {% extends 'AnnounceSystem/base.html' %}
+{% load static %}
 {% block content %}
 <h1>{{message}}</h1>
+{{newsunits}}
+<div class="contentbox">
+    <table width="100%">
+    <tr>
+        <th align="left">分類</th>
+        <th align="left">標題</th>
+        <th align="left">時間</th>
+        <th align="left">點閱數</th>
+    </tr>
+
+    {% for unit in newsunits %}
+    {% comment %} 將資料庫依照分類、標題、上傳時間、點閱數用迴圈顯示在表格上 {% endcomment %}
+        <tr class="alt">
+            <td><div class="typeblock">【{{ unit.catego }}】</div></td>
+            {% comment %} <td><a href="/detail/{{unit.id}}/">{{ unit.title }}</a></td>  {% endcomment %}
+            <td><a href="{% url 'AnnounceSystem:detail' unit.id %}">{{ unit.title }}</a></td>
+            {% comment  %}點標題傳送連結到指定網址 {% endcomment %}
+            <td>{{ unit.pubtime }}</td>
+            <td>{{ unit.press }}</td>
+        </tr>
+    {% empty %}
+        {% comment %} 當迴圈為空值時 {% endcomment %}
+        <div class="status warning">
+            <p><img src="{% static "images/icon_warning.png" %}" alt="Warning" /><span>注意</span> 目前新聞資料庫中沒有任何資料！</p>
+        </div>
+    {% endfor %}
+    </table>
+
+    <div class="topfunction">
+        {% comment %} 換頁功能 {% endcomment %}
+        {% if currentpage > 1 %}
+            <a href="/index/1/" title="上一頁">
+                
+            <img src="{% static "images/prevpage.png" %}" alt="上一頁" width="64" height="24" /></a>
+        {% endif %}
+        {% if currentpage < totpage %}
+            <a href="/index/2/" title="下一頁">
+            <img src="{% static "images/nextpage.png" %}" alt="下一頁" width="64" height="24" /></a>
+        {% endif %}
+    </div>
+
+
+</div>
 {% endblock content %}
