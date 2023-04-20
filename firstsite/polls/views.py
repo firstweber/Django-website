@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404,render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
@@ -7,6 +7,7 @@ from django.utils import timezone
 
 
 from .models import Question, Choice
+from .form import ContactForm
 # Create your views here.
 
 #def index(request):
@@ -116,4 +117,16 @@ class ResultsView(generic.DetailView):
     template_name = "polls/results.html"
 
     
-    
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('polls:contact_success') # 使用 shortcut.redirect
+            # return HttpResponseRedirect(reverse('polls:contact_success')) # 使用 HttpresponseRedirect
+    else:
+        form = ContactForm()
+    return render(request, 'polls/contact.html', {'form':form})  
+
+def contact_success(request):
+    return render(request, 'polls/contact_success.html')
