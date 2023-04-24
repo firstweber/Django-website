@@ -21,7 +21,8 @@ app_name = 'AnnounceSystem'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('<str:pageindex>/', views.index),
-    path('error/', views.test_error, name='test'),
-    path('detail/<int:detailid>', views.detail, name='detail'),
+    path('<str:pageindex>/', views.index, name='index'),
+    path('error/<int:status>/', views.test_error, name='test'),
+    path('detail/<int:detailid>/', views.detail, name='detail'),
+    path('login/<str:loc>', views.login, name='login'),
 ]

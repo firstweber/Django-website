@@ -29,8 +29,10 @@
 
     <div class="col-md-3 text-end">
       <form>
-        <button type="button" class="btn btn-outline-primary me-2">Login</button>
-        <button type="submit" class="btn btn-outline-primary me-2" formaction="{% url 'AnnounceSystem:test' %}">Click me</button>
+        <button type="submit" class="btn btn-outline-primary me-2" formaction="{% url 'AnnounceSystem:login' loc="guest"%}">Login</button>
+        {% comment %} {% url 'login' as the_url %} {% endcomment %}
+        {% comment %} <button type="submit" class="btn btn-outline-primary me-2" formaction="{{the_url}}">Login</button> {% endcomment %}
+        <button type="submit" class="btn btn-outline-primary me-2" formaction="{% url 'AnnounceSystem:test' status=404 %}">Click me</button>
         <button type="button" class="btn btn-primary">Sign-up</button>
       </form>
     </div>

@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
+from django.urls import reverse
 from .models import NewsUnit
+
 
 import math
 # Create your views here.
@@ -8,8 +10,9 @@ import math
 # def index(request):
     # return HttpResponse('<h1> this is AnnSystem </h1>')
 
-def test_error(request):
-    return HttpResponse(status=404)
+def test_error(request, status=None):
+    status = 404
+    return HttpResponse(status=status)
 
 #def index(request):
 #    context = {'message' : "hello"}
@@ -59,3 +62,15 @@ def detail(request, detailid=None):
 	unit.save()  #儲存資料
 	
 	return render(request, "AnnounceSystem/detail.html", locals())
+
+def login(request, loc=None):
+    title = "Login System"
+    message = ""
+    if loc == "guest":
+        message = "請進行登入"
+        return render(request, "AnnounceSystem/login.html", locals())
+    
+    # return render(request, "AnnounceSystem/login.html", locals())
+    # return render(request, reverse('AnnounceSystem/login.html'), locals())
+
+    return redirect('AnnounceSystem:index')
