@@ -3,7 +3,7 @@
 {% block content %}
 <h1>{{message}}</h1><br>
 {{request.get_full_path}}<br>
-{{newsunits}} <br><br><br>
+<p>Show four item = {{newsunits}} </p><br><br><br>
 <div class="contentbox">
     <table width="100%">
     <tr>
@@ -34,12 +34,12 @@
     <div class="topfunction">
         {% comment %} 換頁功能 {% endcomment %}
         {% if currentpage > 1 %}
-            <a href="{% url 'AnnounceSystem:index' %}1" title="上一頁">
+            <a href="{% url 'AnnounceSystem:index' pageindex="1" %}" title="上一頁">
                 
             <img src="{% static "images/prevpage.png" %}" alt="上一頁" width="64" height="24" /></a>
         {% endif %}
         {% if currentpage < totpage %}
-            <a href="{% url 'AnnounceSystem:index' %}2 " title="下一頁">
+            <a href="{% url 'AnnounceSystem:index' pageindex=2 %} " title="下一頁">
             <img src="{% static "images/nextpage.png" %}" alt="下一頁" width="64" height="24" /></a>
         {% endif %}
     </div>
