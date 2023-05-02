@@ -5,5 +5,37 @@
 <body>
     <h1>Thank You</h1>
     <p>Your message has been sent.</p>
+    {{req_dir}}
+
+    <br><br><br>
+
+    {% comment %} request. = {{request.}} <br> {% endcomment %}
+    request.str = {{req_str}} <br>
+    request.path = {{req_path}} <br>
+    {% comment %} request.headers = {{request.headers}} <br> {% endcomment %}
+    request.method = {{req_method}} <br>
+    request.get_full_path = {{req_get_full_path}} <br>
+    request.POST = {{req_POST}} <br>
+
+    {% comment %} {% for request in req_dir %} {% endcomment %}
+        {% comment %} {{request}} {% endcomment %}
+    
+    {% comment %} {% endfor %} {% endcomment %}
+
+    <table>
+        <tr>
+            <th align="left">名稱</th>
+            <th align="left">內容</th>
+        </tr>
+    
+        {% for req_value in req_dir %}
+            <tr class="alt">
+                <td>{{req_value}}</td>
+                <td>"request.{{req_value}}"</td>   
+            </tr>
+        {% endfor %}
+    </table>
+
+
 </body>
 </html>

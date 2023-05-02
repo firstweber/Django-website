@@ -129,4 +129,13 @@ def contact(request):
     return render(request, 'polls/contact.html', {'form':form})  
 
 def contact_success(request):
-    return render(request, 'polls/contact_success.html')
+    req_dir = dir(request)
+    reqlenth = len(req_dir)
+    req_str = request.__str__
+    req_path = request.path
+    req_headers = request.headers
+    req_method = request.method
+    req_get_full_path = request.get_full_path
+    req_POST = request.POST
+
+    return render(request, 'polls/contact_success.html', locals())
