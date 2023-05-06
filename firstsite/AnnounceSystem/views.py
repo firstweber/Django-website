@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import Http404, HttpResponse
 from django.urls import reverse
+from django.contrib import auth
+from django.contrib.auth import authenticate
 from .models import NewsUnit
 
 
@@ -70,7 +72,22 @@ def login(request, loc=None):
         message = "請進行登入"
         return render(request, "AnnounceSystem/login.html", locals())
     
-    # return render(request, "AnnounceSystem/login.html", locals())
-    # return render(request, reverse('AnnounceSystem/login.html'), locals())
+    if request.method == 'POST' and loc == "admin":
+        name = request.POST['username'].strip()
+        password = request.POST['password']
+        admin01 = authenticate(username=name, password=password)
+        if admin01 is not None:
+            if admin01.is_active:
+                auth.login(request, admin01)
+                message = "login success" + " loc = " +loc
+                return render(request, "AnnounceSystem/login.html", locals())
+            else:
+                message = "Invalid account."
+            
+        else:
+            message = " Lonin not pass. "
+            return render(request, "AnnounceSystem/login.html", locals())
 
-    return redirect('AnnounceSystem:index')
+    return render(request, "AnnounceSystem/login.html", locals())
+    # return render(request, reverse('AnnounceSystem/login.html'), locals())
+    # return redirect('AnnounceSystem:index')
