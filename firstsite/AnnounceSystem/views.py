@@ -94,32 +94,26 @@ def login(request, loc=None):
     # return redirect('AnnounceSystem:index')
 
 def adminShow(request, pageindex=None):
-    global page1  #重複開啟本網頁時需保留 page1 的值
-    pagesize = 4  #每頁顯示的資料筆數
-    newsall = NewsUnit.objects.all().order_by('-id')  #讀取新聞資料表,依時間遞減排序
-    # NewsUnit.objects.all()[:5] 取出前五筆 or 排序 NewsUnit.objects.all().order_by('-id')[:5]
-    # NewsUnit.objects.filter().count() -> int
-    datasize = len(newsall)  #新聞筆數
-    totpage = math.ceil(datasize / pagesize)  #總頁數
-    if pageindex==None:  #無參數
+    global page1  
+    pagesize = 4 
+    newsall = NewsUnit.objects.all().order_by('-id')
+    datasize = len(newsall) 
+    totpage = math.ceil(datasize / pagesize)
+    if pageindex==None:
         page1 = 1
         newsunits = NewsUnit.objects.order_by('-id')[:pagesize]
-    elif pageindex=='1':  #上一頁
-        start = (page1-2)*pagesize  #該頁第1筆資料
-        if start >= 0:  #有前頁資料就顯示
-            # newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[start:(start+pagesize)]
+    elif pageindex=='1': 
+        start = (page1-2)*pagesize 
+        if start >= 0:  
             newsunits = NewsUnit.objects.order_by('-id')[start:(start+pagesize)]
             page1 -= 1
-    elif pageindex=='2':  #下一頁
-        start = page1*pagesize  #該頁第1筆資料
-        if start < datasize:  #有下頁資料就顯示
-            # newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[start:(start+pagesize)]
+    elif pageindex=='2':  
+        start = page1*pagesize  
+        if start < datasize:  
             newsunits = NewsUnit.objects.order_by('-id')[start:(start+pagesize)]
             page1 += 1
-    elif pageindex=='3':  #由詳細頁面返回首頁
-        start = (page1-1)*pagesize  #取得原有頁面第1筆資料
-        # newsunits = NewsUnit.objects.filter(enabled=True).order_by('-id')[start:(start+pagesize)]
+    elif pageindex=='3':  
+        start = (page1-1)*pagesize  
         newsunits = NewsUnit.objects.order_by('-id')[start:(start+pagesize)]
-
-    currentpage = page1  #將目頁前頁面以區域變數傳回html
+    currentpage = page1  
     return render(request, "AnnounceSystem/announadmin.html", locals())
