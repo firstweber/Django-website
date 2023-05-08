@@ -27,4 +27,6 @@ urlpatterns = [
     path('detail/<int:detailid>/', views.detail, name='detail'),
     path('login/<str:loc>/', views.login, name='login'),
     path('login/', views.login, name='login'),
+    path('adminshow/', views.adminShow, name='showData'),
+    path('adminshow/<str:pageindex>/', views.adminShow, name='showData'),
 ]

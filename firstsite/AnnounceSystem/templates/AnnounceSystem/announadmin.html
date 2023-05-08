@@ -1,0 +1,38 @@
+{% extends 'AnnounceSystem/base.html' %}
+{% block content %}
+<div class="contentbox">
+    <table width="100%">
+        <tr>
+            <th align="left">分類</th>
+            <th align="left">標題</th>
+            <th align="left">時間</th>
+            <th align="left">編輯</th>
+        </tr>
+        {% for unit in newsunits %}
+            <tr class="alt">
+            <td><div class="typeblock">【{{ unit.catego }}】</div></td>
+            <td><a href="/newsedit/{{unit.id}}/">{{ unit.title }}</a></td>
+            <td>{{ unit.pubtime }}</td>
+            <td>
+                {% comment %} <a href="/newsedit/{{unit.id}}/" title="新聞編輯"> <img src="{% static "images/note_edit.png" %}"  width="16" height="16" /></a> {% endcomment %}
+                <a href="/newsedit/{{unit.id}}/" title="新聞編輯">編輯</a>
+                {% comment %} <a href="/newsdelete/{{unit.id}}/" title="新聞刪除"><img src="{% static "images/cross.png" %}" width="16" height="16" /></a> {% endcomment %}
+                <a href="/newsdelete/{{unit.id}}/" title="新聞刪除">刪除</a>
+            </td>
+            </tr>
+        {% empty %}
+            <div class="status warning">
+                <p><span>注意</span> 目前新聞資料庫中沒有任何資料！</p>
+            </div>
+        {% endfor %}
+    </table>
+    <div class="topfunction">
+    {% if currentpage > 1 %}
+        <a href="{% url 'AnnounceSystem:showData' pageindex=1 %}" title="上一頁">上一頁</a>
+    {% endif %}
+    {% if currentpage < totpage %}
+        <a href="{% url 'AnnounceSystem:showData' pageindex=2 %}" title="下一頁">下一頁</a>
+    {% endif %}
+    </div>
+</div>
+{% endblock content %}
