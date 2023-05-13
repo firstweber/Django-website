@@ -117,3 +117,25 @@ def adminShow(request, pageindex=None):
         newsunits = NewsUnit.objects.order_by('-id')[start:(start+pagesize)]
     currentpage = page1  
     return render(request, "AnnounceSystem/announadmin.html", locals())
+
+
+
+def newsadd(request):
+    message = ""
+    category = request.POST.get('news_type', '')
+    subject = request.POST.get('news_subject', '')
+    editor = request.POST.get('news_editor', '')
+    content = request.POST.get('news_content', '')
+    ok = request.POST.get('news_ok', '')
+
+    if subject == '' or editor == '' or content == '':
+        message = "Can not be blank."
+    else:
+        if ok == "yes":
+            enabled = True
+        else:
+            enabled = False
+        unit = NewsUnit.objects.create(catego=category, nickname=editor, title=subject, message=content, enabled=enabled, press=0)
+        unit.save()
+        return redirect('AnnounceSystem:showData')
+    return render(request, "AnnounceSystem/newadd.html", locals())
