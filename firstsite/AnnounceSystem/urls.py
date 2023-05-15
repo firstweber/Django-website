@@ -29,4 +29,5 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('adminshow/', views.adminShow, name='showData'),
     path('adminshow/<str:pageindex>/', views.adminShow, name='showData'),
+    path('addnews/', views.newsadd, name='newsadd'),
 ]
