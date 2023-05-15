@@ -138,4 +138,4 @@ def newsadd(request):
         unit = NewsUnit.objects.create(catego=category, nickname=editor, title=subject, message=content, enabled=enabled, press=0)
         unit.save()
         return redirect('AnnounceSystem:showData')
-    return render(request, "AnnounceSystem/newadd.html", locals())
+    return render(request, "AnnounceSystem/newsadd.html", locals())
