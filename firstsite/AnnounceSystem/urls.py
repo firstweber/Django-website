@@ -30,4 +30,8 @@ urlpatterns = [
     path('adminshow/', views.adminShow, name='showData'),
     path('adminshow/<str:pageindex>/', views.adminShow, name='showData'),
     path('addnews/', views.newsadd, name='newsadd'),
+    path('editnews/', views.newsedit, name='newsedit'),
+    path('editnews/<int:newsid>', views.newsedit, name='newsedit'),
+    path('delnews/', views.newsdelete, name='newsdelete'),
+    path('delnews/<int:newsid>', views.newsdelete, name='newsdelete'),
 ]

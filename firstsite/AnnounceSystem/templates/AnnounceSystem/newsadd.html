@@ -32,7 +32,7 @@
                     <td valign="baseline"><textarea name="news_content" id="news_content" cols="60" rows="15" required></textarea></td>
                 </tr>
                 <tr>
-                    <td valign="baseline"><strong>審核</strong></td>
+                    <td valign="baseline"><strong>審核內容</strong></td>
                     <td valign="baseline">
                         <input type="radio" name="news_ok" id="news_ok2" value="yes" checked="checked">已通過
                         <input type="radio" name="news_ok" id="news_ok" value="no">審核中
@@ -46,8 +46,7 @@
                         {% comment %} <input type="button" name="button3" id="button3" value="回主頁面" onclick="history.back()"> {% endcomment %}
                         <input type="button" name="button3" id="button3" value="回主頁面" onclick="location.href='{% url 'AnnounceSystem:showData' %}'">
                     </td>
-                </tr>
-                
+                </tr>                
             </table>
             <span style="color:red">{{message}}</span>  
         </form>

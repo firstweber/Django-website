@@ -12,13 +12,13 @@
         {% for unit in newsunits %}
             <tr class="alt">
             <td><div class="typeblock">【{{ unit.catego }}】</div></td>
-            <td><a href="/newsedit/{{unit.id}}/">{{ unit.title }}</a></td>
+            <td><a href="{% url 'AnnounceSystem:newsedit' unit.id %}">{{ unit.title }}</a></td>
             <td>{{ unit.pubtime }}</td>
             <td>
                 {% comment %} <a href="/newsedit/{{unit.id}}/" title="新聞編輯"> <img src="{% static "images/note_edit.png" %}"  width="16" height="16" /></a> {% endcomment %}
-                <a href="/newsedit/{{unit.id}}/" title="新聞編輯">編輯</a>
+                <a href="{% url 'AnnounceSystem:newsedit' unit.id %}" title="新聞編輯">編輯</a>
                 {% comment %} <a href="/newsdelete/{{unit.id}}/" title="新聞刪除"><img src="{% static "images/cross.png" %}" width="16" height="16" /></a> {% endcomment %}
-                <a href="/newsdelete/{{unit.id}}/" title="新聞刪除">刪除</a>
+                <a href="{% url 'AnnounceSystem:newsdelete' unit.id %}" title="新聞刪除">刪除</a>
             </td>
             </tr>
         {% empty %}
