@@ -139,3 +139,44 @@ def newsadd(request):
         unit.save()
         return redirect('AnnounceSystem:showData')
     return render(request, "AnnounceSystem/newsadd.html", locals())
+
+def newsedit(request, newsid=None, edittype=None):  #修改資料
+	unit = NewsUnit.objects.get(id=newsid)  #讀取指定資料
+	categories = ["公告", "更新", "活動", "新書", "其他"]
+	if edittype == None:  #進入修改頁面,顯示原有資料
+		type = unit.catego
+		subject = unit.title
+		editor = unit.nickname
+		content = unit.message
+		ok = unit.enabled
+	elif edittype == '1':  #修改完畢,存檔
+		category = request.POST.get('news_type', '')
+		subject = request.POST.get('news_subject', '')
+		editor = request.POST.get('news_editor', '')
+		content = request.POST.get('news_content', '')
+		ok = request.POST.get('news_ok', '')
+		if ok=='yes':
+			enabled = True
+		else:
+			enabled = False
+		unit.catego=category
+		unit.nickname=editor
+		unit.title=subject
+		unit.message=content
+		unit.enabled=enabled
+		unit.save()
+		return redirect('AnnounceSystem:showData')
+	return render(request, "AnnounceSystem/newsedit.html", locals())
+
+def newsdelete(request, newsid=None, deletetype=None):  #刪除資料
+	unit = NewsUnit.objects.get(id=newsid)  #讀取指定資料
+	if deletetype == None:  #進入刪除頁面,顯示原有資料
+		type = str(unit.catego.strip())
+		subject = unit.title
+		editor = unit.nickname
+		content = unit.message
+		date = unit.pubtime
+	elif deletetype == '1':  #按刪除鈕
+		unit.delete()
+		return redirect('AnnounceSystem:showData')
+	return render(request, "AnnounceSystem/newsdelete.html", locals())
