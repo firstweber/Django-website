@@ -54,14 +54,14 @@ def index(request, pageindex=None):
     return render(request, "AnnounceSystem/index.html", locals())
 
 def detail(request, detailid=None):
-	unit = NewsUnit.objects.get(id=detailid)  #根據參數取出資料
+	unit = NewsUnit.objects.get(id=detailid)
 	category = unit.catego
 	title = unit.title
 	pubtime = unit.pubtime
 	nickname = unit.nickname
 	message = unit.message
-	unit.press += 1  #點擊數加1
-	unit.save()  #儲存資料
+	unit.press += 1
+	unit.save()
 	
 	return render(request, "AnnounceSystem/detail.html", locals())
 
@@ -117,8 +117,6 @@ def adminShow(request, pageindex=None):
         newsunits = NewsUnit.objects.order_by('-id')[start:(start+pagesize)]
     currentpage = page1  
     return render(request, "AnnounceSystem/announadmin.html", locals())
-
-
 
 def newsadd(request):
     message = ""
