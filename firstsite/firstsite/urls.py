@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),  # Including another URLconf
     path('AnnounceSystem/', include('AnnounceSystem.urls')),
+    path('snippets/', include('snippets.urls')),
 ]

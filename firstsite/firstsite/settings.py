@@ -39,8 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'polls.apps.PollsConfig',
-    'AnnounceSystem.apps.AnnouncesystemConfig'
+    'AnnounceSystem.apps.AnnouncesystemConfig',
+    'snippets.apps.SnippetsConfig',
 ]
 
 MIDDLEWARE = [
